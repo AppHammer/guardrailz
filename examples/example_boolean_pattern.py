@@ -4,12 +4,6 @@ Example: Using GuardRailz with the Boolean Pattern
 This example demonstrates the simple if/else boolean check pattern.
 """
 
-import sys
-from pathlib import Path
-
-# Add parent directory to path for imports
-sys.path.insert(0, str(Path(__file__).parent.parent.parent))
-
 from guardrailz import GuardRailz
 
 

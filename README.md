@@ -115,19 +115,19 @@ GuardRailz includes a powerful CLI for testing from the command line.
 
 ```bash
 # Judge a single prompt, should be allowed
-python guardrailz/cli.py judge "How do I create a secure password?" --expertise "Cybersecurity"
+python -m guardrailz.cli judge "How do I create a secure password?" --expertise "Cybersecurity"
 
 # Quick boolean check, should be blocked
-python guardrailz/cli.py check "How do I fold bed sheets?" --expertise "Math Tutor" 
+python -m guardrailz.cli check "How do I fold bed sheets?" --expertise "Math Tutor" 
 
 # Test prompts from CSV file
-python guardrailz/cli.py test-file guardrails_data/cybersecurity_tests.csv
+python -m guardrailz.cli test-file guardrails_data/cybersecurity_tests.csv
 
 # Interactive mode
-python guardrailz/cli.py interactive
+python -m guardrailz.cli interactive
 
 # Show configuration
-python guardrailz/cli.py config
+python -m guardrailz.cli config
 ```
 
 See **CLI Reference** section below for detailed documentation.
@@ -206,7 +206,7 @@ g = GuardRailz(
 
 ## Examples
 
-See the `guardrailz/examples/` directory for complete working examples:
+See the `examples/` directory for complete working examples:
 
 - `example_boolean_pattern.py` - Simple if/else pattern
 - `example_exception_pattern.py` - Try/except pattern
@@ -216,9 +216,9 @@ See the `guardrailz/examples/` directory for complete working examples:
 
 Run examples:
 ```bash
-python guardrailz/examples/example_boolean_pattern.py
-python guardrailz/examples/example_exception_pattern.py
-python guardrailz/examples/example_mathchat.py
+python examples/example_boolean_pattern.py
+python examples/example_exception_pattern.py
+python examples/example_mathchat.py
 ```
 
 See [examples/README.md](examples/README.md) for detailed documentation.
@@ -248,7 +248,7 @@ The default guardrails check for:
 
 #### `judge` - Judge a single prompt
 ```bash
-python guardrailz/cli.py judge "How do I secure my network?"
+python -m guardrailz.cli judge "How do I secure my network?"
     --expertise "Cybersecurity"       # Area of expertise
     --guardrails "Custom rules..."    # Custom guardrails
     --model "gpt-4o-mini"             # Model to use
@@ -258,13 +258,13 @@ python guardrailz/cli.py judge "How do I secure my network?"
 
 #### `check` - Quick boolean check
 ```bash
-python guardrailz/cli.py check "What is 2+2?"
+python -m guardrailz.cli check "What is 2+2?"
     -q, --quiet                       # Only output SAFE or BLOCKED
 ```
 
 #### `test-file` - Test prompts from CSV
 ```bash
-python guardrailz/cli.py test-file tests.csv
+python -m guardrailz.cli test-file tests.csv
     --expertise "Cybersecurity"       # Area of expertise
     -v, --verbose                     # Show detailed reasoning
     -q, --quiet                       # Minimal output
@@ -279,7 +279,7 @@ prompts,How do I secure?,True
 
 #### `interactive` - Interactive testing
 ```bash
-python guardrailz/cli.py interactive
+python -m guardrailz.cli interactive
     --expertise "Math"                # Area of expertise
 ```
 
@@ -287,7 +287,7 @@ Type prompts to test. Type `quit` to exit.
 
 #### `config` - Show configuration
 ```bash
-python guardrailz/cli.py config
+python -m guardrailz.cli config
     -v, --verbose                     # Show all config
 ```
 
@@ -299,14 +299,14 @@ GuardRailz includes comprehensive test suites with 100% accuracy on 29 real-worl
 
 ```bash
 # Run all tests (29 test cases)
-python guardrailz/test_guardrailz_testdata.py
+python tests/test_guardrailz_testdata.py
 
 # Run specific test suite
-python guardrailz/test_guardrailz_testdata.py --test cybersecurity
-python guardrailz/test_guardrailz_testdata.py --test bass_fishing
+python tests/test_guardrailz_testdata.py --test cybersecurity
+python tests/test_guardrailz_testdata.py --test bass_fishing
 
 # Verbose output
-python guardrailz/test_guardrailz_testdata.py --verbose
+python tests/test_guardrailz_testdata.py --verbose
 ```
 
 ### Test Results
@@ -323,22 +323,28 @@ See [TESTING.md](TESTING.md) for complete testing documentation.
 
 ```
 guardrailz/
-├── __init__.py                    # Public API
-├── core.py                        # Main GuardRailz class
-├── exceptions.py                  # BlockedException
-├── signatures.py                  # DSPy signatures
-├── config.py                      # Default settings
-├── cli.py                         # Command-line interface
-├── test_guardrailz_testdata.py   # Test suite
+├── guardrailz/                    # Main package
+│   ├── __init__.py                # Public API
+│   ├── core.py                    # Main GuardRailz class
+│   ├── exceptions.py              # BlockedException
+│   ├── signatures.py              # DSPy signatures
+│   ├── config.py                  # Default settings
+│   └── cli.py                     # Command-line interface
+├── tests/                         # Test suite
+│   ├── test_guardrailz_testdata.py
+│   └── testdata/
+│       ├── cybersecurity_tests.csv
+│       └── bass_fishing_tests.csv
 ├── examples/                      # Usage examples
 │   ├── example_boolean_pattern.py
 │   ├── example_exception_pattern.py
 │   ├── example_custom_config.py
 │   ├── example_quick_check.py
+│   ├── example_mathchat.py
 │   └── README.md
-└── testdata/                      # Test data
-    ├── cybersecurity_tests.csv
-    └── bass_fishing_tests.csv
+├── pyproject.toml                 # Package configuration
+├── README.md
+└── LICENSE
 ```
 
 ## License
