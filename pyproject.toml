@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=45", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "guardrailz"
+version = "0.1.0"
+description = "Universal Guardrails for LLMs/Agents in a Pythonic API. DSPy powered."
+readme = "README.md"
+license = "MIT"
+authors = [
+    {name = "GuardRailz Contributors"}
+]
+requires-python = ">=3.8"
+dependencies = [
+    "dspy-ai",
+    "python-dotenv",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+[project.urls]
+Homepage = "https://github.com/Apphammer/guardrailz"
+Repository = "https://github.com/Apphammer/guardrailz"
+Issues = "https://github.com/Apphammer/guardrailz/issues"
+
+[project.scripts]
+guardrailz = "cli:main"
+
+[tool.setuptools]
+py-modules = ["__init__", "cli", "config", "core", "exceptions", "signatures"]
+
+[tool.setuptools.package-data]
+"*" = ["*.csv"]
